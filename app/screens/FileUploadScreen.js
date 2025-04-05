@@ -11,10 +11,9 @@ import {
   Button,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker"; // Importing ImagePicker for selecting images and videos
-import * as VideoPicker from "expo-video-picker"; // For picking videos
 import * as AudioRecorder from "expo-av"; // For recording audio
 import * as Location from "expo-location"; // For getting the user's location
-import { firebase } from "./app/config/firebase-config";
+import { firebase } from "../config/firebase";
 
 function FileUploadScreen({ navigation }) {
   const [mediaUri, setMediaUri] = useState(null);
@@ -40,8 +39,8 @@ function FileUploadScreen({ navigation }) {
 
   // Function to pick a video
   const pickVideo = async () => {
-    let result = await VideoPicker.launchImageLibraryAsync({
-      mediaTypes: VideoPicker.MediaTypeOptions.Videos,
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
       allowsEditing: true,
       quality: 1,
     });

@@ -5,7 +5,7 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import SignUpScreen from "./app/screens/SignUpScreen";
 import FileUploadScreen from "./app/screens/FileUploadScreen"; // Import the FileUploadScreen
-import { firebase } from "./app/config/firebase-config"; // Import your Firebase config
+import { firebase } from "./app/config/firebase"; // Import your Firebase config
 
 const Stack = createStackNavigator();
 

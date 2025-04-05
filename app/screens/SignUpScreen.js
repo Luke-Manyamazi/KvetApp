@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { firebase } from "./app/config/firebase-config";
+import { firebase } from "../config/firebase";
 
 function SignUpScreen({ navigation }) {
   const [name, setName] = useState(""); // For storing user name

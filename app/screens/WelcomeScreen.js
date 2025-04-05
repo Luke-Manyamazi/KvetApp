@@ -7,7 +7,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { firebase } from "./app/config/firebase-config";
+import { firebase } from "../config/firebase";
 
 function WelcomeScreen({ navigation }) {
   useEffect(() => {
