@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { firebase } from "../config/firebase"; // Import your Firebase config
+import { firebase } from "../config/firebase";
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = useState(""); // For storing user email
@@ -21,7 +21,7 @@ function LoginScreen({ navigation }) {
       await firebase.auth().signInWithEmailAndPassword(email, password);
 
       // Redirect to the home screen after successful login
-      navigation.navigate("Home"); // Replace "Home" with your actual home screen name
+      navigation.navigate("FileUpLoad");
     } catch (error) {
       console.error(error.message);
     }
@@ -111,27 +111,27 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     padding: 10,
     marginTop: 20,
-    width: "150%", // Corrected from "100%"
-    borderRadius: 5, // Corrected from "5"
+    width: "150%",
+    borderRadius: 5,
     backgroundColor: "beige",
   },
   logoContainer: {
     position: "absolute",
-    top: 150, // Corrected from "70"
+    top: 150,
     alignItems: "center",
   },
   logo: {
-    width: 100, // Corrected from "100"
-    height: 100, // Corrected from "100"
+    width: 100,
+    height: 100,
   },
   loginButton: {
     width: "150%",
-    height: 40, // Corrected from "70"
+    height: 40,
     backgroundColor: "#21409a",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5, // Added border radius for better aesthetics
-    marginTop: 20, // Corrected from "20"
+    borderRadius: 5,
+    marginTop: 20,
   },
   appTitle: {
     fontSize: 36,

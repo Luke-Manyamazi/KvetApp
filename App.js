@@ -4,8 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import LoginScreen from "./app/screens/LoginScreen";
 import SignUpScreen from "./app/screens/SignUpScreen";
-import FileUploadScreen from "./app/screens/FileUploadScreen"; // Import the FileUploadScreen
-import { firebase } from "./app/config/firebase"; // Import your Firebase config
+import FileUploadScreen from "./app/screens/FileUploadScreen";
+import { firebase } from "./app/config/firebase";
 
 const Stack = createStackNavigator();
 

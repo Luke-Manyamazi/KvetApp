@@ -11,9 +11,9 @@ import {
 import { firebase } from "../config/firebase";
 
 function SignUpScreen({ navigation }) {
-  const [name, setName] = useState(""); // For storing user name
-  const [email, setEmail] = useState(""); // For storing user email
-  const [password, setPassword] = useState(""); // For storing user password
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // Handle sign up logic
   const handleSignUp = async () => {
