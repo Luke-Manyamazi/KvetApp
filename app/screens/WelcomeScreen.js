@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Image,
   ImageBackground,
@@ -7,8 +7,22 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { firebase } from "./app/config/firebase-config";
 
 function WelcomeScreen({ navigation }) {
+  useEffect(() => {
+    // Check if the user is already logged in
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // If the user is logged in, navigate to the Home screen
+        navigation.navigate("Home"); // Replace "Home" with your actual home screen name
+      }
+    });
+
+    // Clean up the listener when the component is unmounted
+    return () => unsubscribe();
+  }, [navigation]);
+
   return (
     <ImageBackground
       style={styles.background}
@@ -16,7 +30,6 @@ function WelcomeScreen({ navigation }) {
       blurRadius={3}
     >
       {/* Logo and Title Section */}
-
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
@@ -37,7 +50,7 @@ function WelcomeScreen({ navigation }) {
 
       <TouchableOpacity
         style={styles.registerButton}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("SignUp")}
       >
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>

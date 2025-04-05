@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -8,8 +8,35 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { firebase } from "./app/config/firebase-config";
 
 function SignUpScreen({ navigation }) {
+  const [name, setName] = useState(""); // For storing user name
+  const [email, setEmail] = useState(""); // For storing user email
+  const [password, setPassword] = useState(""); // For storing user password
+
+  // Handle sign up logic
+  const handleSignUp = async () => {
+    try {
+      // Create user with email and password
+      const userCredential = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
+      // Save additional user data (name) to Firestore
+      await firebase.firestore().collection("users").doc(user.uid).set({
+        name,
+        email,
+      });
+
+      // Redirect to login screen after successful sign-up
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <ImageBackground
       style={styles.background}
@@ -22,16 +49,37 @@ function SignUpScreen({ navigation }) {
           source={require("../assets/kvet-logo.png")}
         />
         <Text style={styles.appTitle}>Sign Up</Text>
-        <TextInput style={styles.input} placeholder="Fullname" />
-        <TextInput style={styles.input} placeholder="Email" />
+
+        {/* Name input */}
+        <TextInput
+          style={styles.input}
+          placeholder="Fullname"
+          value={name}
+          onChangeText={setName}
+        />
+
+        {/* Email input */}
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        {/* Password input */}
         <TextInput
           style={styles.input}
           placeholder="Password"
+          value={password}
           secureTextEntry
+          onChangeText={setPassword}
         />
-        <TouchableOpacity style={styles.signUpButton}>
+
+        {/* Sign up button */}
+        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
+
         <View style={styles.loginContainer}>
           <Text style={styles.oldEmployee}>Already have an account?</Text>
           <TouchableOpacity>
@@ -39,7 +87,6 @@ function SignUpScreen({ navigation }) {
               style={styles.login}
               onPress={() => navigation.navigate("Login")}
             >
-              {" "}
               Login
             </Text>
           </TouchableOpacity>
